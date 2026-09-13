@@ -21,4 +21,18 @@ public class BookController {
         // Trả về mã 201 Created cùng với bản ghi sách vừa tạo
         return new ResponseEntity<>(savedBook, HttpStatus.CREATED);
     }
+
+    @PatchMapping("/update/{id}")
+    public ResponseEntity<String> updateBookStock(
+            @PathVariable Long id,
+            @jakarta.validation.Valid @RequestBody ra.edu.ss8homework.dto.BookUpdateStockDTO dto) {
+        String result = bookService.updateBook(id, dto);
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Book> getBookById(@PathVariable Long id) {
+        Book book = bookService.getBookById(id);
+        return ResponseEntity.ok(book);
+    }
 }

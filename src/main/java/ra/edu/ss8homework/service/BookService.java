@@ -61,4 +61,19 @@ public class BookService {
 
         return bookRepository.save(book);
     }
+
+    public String updateBook(Long id, ra.edu.ss8homework.dto.BookUpdateStockDTO dto) {
+        Book book = bookRepository.findById(id)
+                .orElseThrow(() -> new ra.edu.ss8homework.exception.ResourceNotFoundException("Book with id " + id + " not found"));
+        
+        book.setStock(dto.getStock());
+        bookRepository.save(book);
+        
+        return "Book stock updated successfully";
+    }
+
+    public Book getBookById(Long id) {
+        return bookRepository.findById(id)
+                .orElseThrow(() -> new ra.edu.ss8homework.exception.ResourceNotFoundException("Book with id " + id + " not found"));
+    }
 }
